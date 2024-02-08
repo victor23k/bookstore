@@ -6,7 +6,7 @@ defmodule Bookstore.Repo.Migrations.CreateBooks do
       add :title, :string
       add :isbn, :string
       add :pub_date, :date
-      add :price, :float
+      add :price, :decimal, precision: 15, scale: 6, null: false
       add :quantity, :integer
       add :editor, :string
       add :img, :binary

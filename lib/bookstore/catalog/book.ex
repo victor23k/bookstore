@@ -7,7 +7,7 @@ defmodule Bookstore.Catalog.Book do
     field :editor, :string
     field :isbn, :string
     field :pub_date, :date
-    field :price, :float
+    field :price, :decimal
     field :quantity, :integer
     field :img, :binary
 
@@ -18,6 +18,6 @@ defmodule Bookstore.Catalog.Book do
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :isbn, :pub_date, :price, :quantity, :editor, :img])
-    |> validate_required([:title, :isbn, :pub_date, :price, :quantity, :editor, :img])
+    |> validate_required([:title, :isbn, :pub_date, :price, :quantity, :editor])
   end
 end
