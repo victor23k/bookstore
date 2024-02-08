@@ -19,7 +19,8 @@ defmodule BookstoreWeb.Router do
 
     get "/", PageController, :home
     get "/books", BooksController, :index
-    get "/books/:title", BooksController, :show
+    get "/books/:id", BooksController, :show
+    post "/books/:id", BooksController, :create
   end
 
   # Other scopes may use custom stacks.

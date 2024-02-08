@@ -2,6 +2,9 @@ defmodule Bookstore.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc """
+  The book entity representes a book in the bookstore
+  """
   schema "books" do
     field :title, :string
     field :editor, :string
