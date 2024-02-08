@@ -19,8 +19,7 @@
   <:item title="Image"><%= @book.img %></:item>
   <:item title="Categories">
     <%= Enum.reduce(@book.categories, "", fn cat, acc -> acc <> cat.title <> ", " end)
-        |> String.slice(0..-3)
-    %>
+    |> String.slice(0..-3) %>
   </:item>
 </.list>
 
