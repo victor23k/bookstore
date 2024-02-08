@@ -2,6 +2,20 @@ defmodule Bookstore.Catalog.Book do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @moduledoc """
+  Define the schema for the book entity which consists of:
+    Title
+    Author
+    Editor
+    ISBN
+    Publication date
+    Price
+    Quantity
+    Cover image
+    Categories <-> Category
+  """
+  alias Bookstore.Catalog.Category
+
   schema "books" do
     field :title, :string
     field :author, :string
@@ -11,6 +25,8 @@ defmodule Bookstore.Catalog.Book do
     field :price, :decimal
     field :quantity, :integer
     field :img, :binary
+
+    many_to_many :categories, Category, join_through: "book_categories", on_replace: :delete
 
     timestamps(type: :utc_datetime)
   end

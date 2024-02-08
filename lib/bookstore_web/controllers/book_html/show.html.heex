@@ -11,12 +11,17 @@
 <.list>
   <:item title="Title"><%= @book.title %></:item>
   <:item title="Author"><%= @book.author %></:item>
-  <:item title="Isbn"><%= @book.isbn %></:item>
+  <:item title="ISBN"><%= @book.isbn %></:item>
   <:item title="Publication date"><%= @book.pub_date %></:item>
   <:item title="Price"><%= @book.price %></:item>
   <:item title="Quantity"><%= @book.quantity %></:item>
   <:item title="Editor"><%= @book.editor %></:item>
   <:item title="Image"><%= @book.img %></:item>
+  <:item title="Categories">
+    <%= Enum.reduce(@book.categories, "", fn cat, acc -> acc <> cat.title <> ", " end)
+        |> String.slice(0..-3)
+    %>
+  </:item>
 </.list>
 
 <.back navigate={~p"/books"}>Back to books</.back>

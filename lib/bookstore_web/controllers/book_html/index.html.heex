@@ -16,6 +16,7 @@
   <:col :let={book} label="Quantity"><%= book.quantity %></:col>
   <:col :let={book} label="Editor"><%= book.editor %></:col>
   <:col :let={book} label="Image"><%= book.img %></:col>
+  <:col :let={book} label="Categories"><%= Enum.map(book.categories, & &1.title) %></:col>
   <:action :let={book}>
     <div class="sr-only">
       <.link navigate={~p"/books/#{book}"}>Show</.link>
