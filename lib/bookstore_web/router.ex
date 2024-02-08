@@ -18,9 +18,6 @@ defmodule BookstoreWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    get "/books", BooksController, :index
-    get "/books/:id", BooksController, :show
-    post "/books/:id", BooksController, :create
   end
 
   # Other scopes may use custom stacks.
