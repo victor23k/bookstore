@@ -3,9 +3,33 @@ defmodule BookstoreWeb.BookControllerTest do
 
   import Bookstore.CatalogFixtures
 
-  @create_attrs %{title: "some title", editor: "some editor", isbn: "some isbn", pub_date: ~D[2024-02-07], price: 120.5, quantity: 42, img: "some img"}
-  @update_attrs %{title: "some updated title", editor: "some updated editor", isbn: "some updated isbn", pub_date: ~D[2024-02-08], price: 456.7, quantity: 43, img: "some updated img"}
-  @invalid_attrs %{title: nil, editor: nil, isbn: nil, pub_date: nil, price: nil, quantity: nil, img: nil}
+  @create_attrs %{
+    title: "some title",
+    editor: "some editor",
+    isbn: "some isbn",
+    pub_date: ~D[2024-02-07],
+    price: 120.5,
+    quantity: 42,
+    img: "some img"
+  }
+  @update_attrs %{
+    title: "some updated title",
+    editor: "some updated editor",
+    isbn: "some updated isbn",
+    pub_date: ~D[2024-02-08],
+    price: 456.7,
+    quantity: 43,
+    img: "some updated img"
+  }
+  @invalid_attrs %{
+    title: nil,
+    editor: nil,
+    isbn: nil,
+    pub_date: nil,
+    price: nil,
+    quantity: nil,
+    img: nil
+  }
 
   describe "index" do
     test "lists all books", %{conn: conn} do

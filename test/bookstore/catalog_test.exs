@@ -8,7 +8,16 @@ defmodule Bookstore.CatalogTest do
 
     import Bookstore.CatalogFixtures
 
-    @invalid_attrs %{title: nil, editor: nil, isbn: nil, pub_date: nil, price: nil, quantity: nil, img: nil}
+    @invalid_attrs %{
+      title: nil,
+      author: nil,
+      editor: nil,
+      isbn: nil,
+      pub_date: nil,
+      price: nil,
+      quantity: nil,
+      img: nil
+    }
 
     test "list_books/0 returns all books" do
       book = book_fixture()
@@ -21,10 +30,20 @@ defmodule Bookstore.CatalogTest do
     end
 
     test "create_book/1 with valid data creates a book" do
-      valid_attrs = %{title: "some title", editor: "some editor", isbn: "some isbn", pub_date: ~D[2024-02-07], price: 120.5, quantity: 42, img: "some img"}
+      valid_attrs = %{
+        title: "some title",
+        editor: "some author",
+        editor: "some editor",
+        isbn: "some isbn",
+        pub_date: ~D[2024-02-07],
+        price: 120.5,
+        quantity: 42,
+        img: "some img"
+      }
 
       assert {:ok, %Book{} = book} = Catalog.create_book(valid_attrs)
       assert book.title == "some title"
+      assert book.author == "some author"
       assert book.editor == "some editor"
       assert book.isbn == "some isbn"
       assert book.pub_date == ~D[2024-02-07]
@@ -39,10 +58,21 @@ defmodule Bookstore.CatalogTest do
 
     test "update_book/2 with valid data updates the book" do
       book = book_fixture()
-      update_attrs = %{title: "some updated title", editor: "some updated editor", isbn: "some updated isbn", pub_date: ~D[2024-02-08], price: 456.7, quantity: 43, img: "some updated img"}
+
+      update_attrs = %{
+        title: "some updated title",
+        title: "some updated author",
+        editor: "some updated editor",
+        isbn: "some updated isbn",
+        pub_date: ~D[2024-02-08],
+        price: 456.7,
+        quantity: 43,
+        img: "some updated img"
+      }
 
       assert {:ok, %Book{} = book} = Catalog.update_book(book, update_attrs)
       assert book.title == "some updated title"
+      assert book.title == "some updated author"
       assert book.editor == "some updated editor"
       assert book.isbn == "some updated isbn"
       assert book.pub_date == ~D[2024-02-08]

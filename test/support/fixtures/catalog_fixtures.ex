@@ -12,6 +12,7 @@ defmodule Bookstore.CatalogFixtures do
       attrs
       |> Enum.into(%{
         editor: "some editor",
+        author: "some author",
         img: "some img",
         isbn: "some isbn",
         price: 120.5,

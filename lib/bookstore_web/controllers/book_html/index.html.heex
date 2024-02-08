@@ -9,12 +9,13 @@
 
 <.table id="books" rows={@books} row_click={&JS.navigate(~p"/books/#{&1}")}>
   <:col :let={book} label="Title"><%= book.title %></:col>
-  <:col :let={book} label="Isbn"><%= book.isbn %></:col>
-  <:col :let={book} label="Pub date"><%= book.pub_date %></:col>
+  <:col :let={book} label="Author"><%= book.author %></:col>
+  <:col :let={book} label="ISBN"><%= book.isbn %></:col>
+  <:col :let={book} label="Publication date"><%= book.pub_date %></:col>
   <:col :let={book} label="Price"><%= book.price %></:col>
   <:col :let={book} label="Quantity"><%= book.quantity %></:col>
   <:col :let={book} label="Editor"><%= book.editor %></:col>
-  <:col :let={book} label="Img"><%= book.img %></:col>
+  <:col :let={book} label="Image"><%= book.img %></:col>
   <:action :let={book}>
     <div class="sr-only">
       <.link navigate={~p"/books/#{book}"}>Show</.link>
