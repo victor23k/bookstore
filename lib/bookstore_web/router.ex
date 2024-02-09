@@ -18,6 +18,7 @@ defmodule BookstoreWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    live "/books_live", BooksLive, :index
     resources "/books", BookController
   end
 

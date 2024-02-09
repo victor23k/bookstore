@@ -23,6 +23,22 @@ defmodule Bookstore.Catalog do
   end
 
   @doc """
+  Returns a paginated list of books with a default limit of 5.
+
+  ## Examples
+
+      iex> list_books_page(0)
+      [%Book{}, ...]
+
+  """
+  def list_books_page(limit \\ 5, offset) do
+    query = from Book, limit: ^limit, offset: ^offset
+
+    Repo.all(query)
+    |> Repo.preload(:categories)
+  end
+
+  @doc """
   Gets a single book.
 
   Raises `Ecto.NoResultsError` if the Book does not exist.
