@@ -6,6 +6,7 @@ defmodule Bookstore.Catalog.Category do
   Define the schema for the category entity which consists of:
     Title
   """
+  alias Bookstore.Catalog.Category
 
   schema "categories" do
     field :title, :string
