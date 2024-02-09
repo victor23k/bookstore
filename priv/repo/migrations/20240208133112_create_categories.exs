@@ -4,6 +4,7 @@ defmodule Bookstore.Repo.Migrations.CreateCategories do
   def change do
     create table(:categories) do
       add :title, :string
+      add :parent_id, references(:categories)
 
       timestamps(type: :utc_datetime)
     end

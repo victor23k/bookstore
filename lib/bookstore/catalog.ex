@@ -215,4 +215,13 @@ defmodule Bookstore.Catalog do
   def list_categories_by_id(category_ids) do
     Repo.all(from c in Category, where: c.id in ^category_ids)
   end
+
+  @doc """
+  Returns the list of categories by title list
+  """
+  def list_categories_by_title(nil), do: []
+
+  def list_categories_by_title(category_titles) do
+    Repo.all(from c in Category, where: c.title in ^category_titles)
+  end
 end

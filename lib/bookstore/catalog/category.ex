@@ -9,6 +9,9 @@ defmodule Bookstore.Catalog.Category do
 
   schema "categories" do
     field :title, :string
+    field :parent_id, :integer
+    belongs_to :parent, Category, foreign_key: :parent_id, references: :id, define_field: false
+    has_many :children, Category, foreign_key: :parent_id, references: :id
 
     timestamps(type: :utc_datetime)
   end
@@ -16,7 +19,7 @@ defmodule Bookstore.Catalog.Category do
   @doc false
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:title])
+    |> cast(attrs, [:title, :parent_id])
     |> validate_required([:title])
     |> unique_constraint(:title)
   end
