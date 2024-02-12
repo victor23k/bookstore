@@ -119,12 +119,30 @@ defmodule Bookstore.Catalog do
 
   """
   def change_book(%Book{} = book, attrs \\ %{}) do
-    categories = list_categories_by_id(attrs["category_ids"])
+    categories =
+      case attrs do
+        %{categories: categories} ->
+          categories
+
+        %{"categories_ids" => categories_ids} ->
+          parse_categories_ids(categories_ids)
+          |> list_categories_by_id()
+
+        _ ->
+          nil
+      end
 
     book
     |> Repo.preload(:categories)
     |> Book.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:categories, categories)
+  end
+
+  defp parse_categories_ids(nil), do: nil
+
+  defp parse_categories_ids(categories_ids) when is_list(categories_ids) do
+    categories_ids
+    |> Enum.map(&String.to_integer(&1))
   end
 
   alias Bookstore.Catalog.Category
@@ -239,5 +257,14 @@ defmodule Bookstore.Catalog do
 
   def list_categories_by_title(category_titles) do
     Repo.all(from c in Category, where: c.title in ^category_titles)
+  end
+
+  @doc """
+  Returns the list of categories ids by title list
+  """
+  def list_categories_ids_by_title(nil), do: []
+
+  def list_categories_ids_by_title(category_titles) do
+    Repo.all(from c in Category, where: c.title in ^category_titles, select: c.id)
   end
 end

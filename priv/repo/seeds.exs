@@ -45,7 +45,7 @@ for [id, title, parent_id] <-
   {:ok, _} = Bookstore.Catalog.create_category(%{id: id, title: title, parent_id: parent_id})
 end
 
-for book <- [
+for attrs <- [
       %{
         title: "The Hobbit",
         author: "J.R.R. Tolkien",
@@ -54,8 +54,8 @@ for book <- [
         pub_date: "1937-09-21",
         quantity: 5,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Fantasy"]),
-        editor: "Houghton Mifflin Harcourt"
+        editor: "Houghton Mifflin Harcourt",
+        categories: Bookstore.Catalog.list_categories_by_title(["Fantasy"])
       },
       %{
         title: "Dune",
@@ -65,8 +65,8 @@ for book <- [
         pub_date: "1965-06-01",
         quantity: 8,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Science Fiction"]),
-        editor: "Ace Books"
+        editor: "Ace Books",
+        categories: Bookstore.Catalog.list_categories_by_title(["Science Fiction"])
       },
       %{
         title: "Murder on the Orient Express",
@@ -76,8 +76,8 @@ for book <- [
         pub_date: "1934-01-01",
         quantity: 3,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Mystery"]),
-        editor: "William Collins, Sons"
+        editor: "William Collins, Sons",
+        categories: Bookstore.Catalog.list_categories_by_title(["Mystery"])
       },
       %{
         title: "The Da Vinci Code",
@@ -87,8 +87,8 @@ for book <- [
         pub_date: "2003-03-18",
         quantity: 12,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Thriller"]),
-        editor: "Doubleday"
+        editor: "Doubleday",
+        categories: Bookstore.Catalog.list_categories_by_title(["Thriller"])
       },
       %{
         title: "The Nightingale",
@@ -98,8 +98,8 @@ for book <- [
         pub_date: "2015-02-03",
         quantity: 6,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Historical Fiction"]),
-        editor: "St. Martin's Press"
+        editor: "St. Martin's Press",
+        categories: Bookstore.Catalog.list_categories_by_title(["Historical Fiction"])
       },
       %{
         title: "Pride and Prejudice",
@@ -109,8 +109,8 @@ for book <- [
         pub_date: "1813-01-28",
         quantity: 10,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Romance"]),
-        editor: "T. Egerton, Whitehall"
+        editor: "T. Egerton, Whitehall",
+        categories: Bookstore.Catalog.list_categories_by_title(["Romance"])
       },
       %{
         title: "Dracula",
@@ -120,8 +120,8 @@ for book <- [
         pub_date: "1897-05-26",
         quantity: 4,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Horror"]),
-        editor: "Archibald Constable and Company"
+        editor: "Archibald Constable and Company",
+        categories: Bookstore.Catalog.list_categories_by_title(["Horror"])
       },
       %{
         title: "Sapiens: A Brief History of Humankind",
@@ -131,8 +131,8 @@ for book <- [
         pub_date: "2011-02-10",
         quantity: 7,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Non-fiction", "History"]),
-        editor: "Harper"
+        editor: "Harper",
+        categories: Bookstore.Catalog.list_categories_by_title(["Non-fiction", "History"])
       },
       %{
         title: "Steve Jobs",
@@ -142,8 +142,8 @@ for book <- [
         pub_date: "2011-10-24",
         quantity: 2,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Biography", "Business"]),
-        editor: "Simon & Schuster"
+        editor: "Simon & Schuster",
+        categories: Bookstore.Catalog.list_categories_by_title(["Biography", "Business"])
       },
       %{
         title: "Educated",
@@ -153,8 +153,8 @@ for book <- [
         pub_date: "2018-02-20",
         quantity: 9,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Memoir"]),
-        editor: "Random House"
+        editor: "Random House",
+        categories: Bookstore.Catalog.list_categories_by_title(["Memoir"])
       },
       %{
         title: "The 7 Habits of Highly Effective People",
@@ -164,8 +164,8 @@ for book <- [
         pub_date: "1989-08-15",
         quantity: 5,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Self-help"]),
-        editor: "Free Press"
+        editor: "Free Press",
+        categories: Bookstore.Catalog.list_categories_by_title(["Self-help"])
       },
       %{
         title: "To Kill a Mockingbird",
@@ -175,8 +175,8 @@ for book <- [
         pub_date: "1960-07-11",
         quantity: 8,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Classic", "Fiction"]),
-        editor: "J.B. Lippincott & Co."
+        editor: "J.B. Lippincott & Co.",
+        categories: Bookstore.Catalog.list_categories_by_title(["Classic", "Fiction"])
       },
       %{
         title: "Harry Potter and the Sorcerer's Stone",
@@ -186,8 +186,8 @@ for book <- [
         pub_date: "1997-06-26",
         quantity: 3,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Fantasy", "Young Adult"]),
-        editor: "Bloomsbury"
+        editor: "Bloomsbury",
+        categories: Bookstore.Catalog.list_categories_by_title(["Fantasy", "Young Adult"])
       },
       %{
         title: "Goodnight Moon",
@@ -197,8 +197,8 @@ for book <- [
         pub_date: "1947-09-03",
         quantity: 6,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Children's"]),
-        editor: "Harper & Brothers"
+        editor: "Harper & Brothers",
+        categories: Bookstore.Catalog.list_categories_by_title(["Children's"])
       },
       %{
         title: "Milk and Honey",
@@ -208,8 +208,8 @@ for book <- [
         pub_date: "2014-11-04",
         quantity: 4,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Poetry"]),
-        editor: "Andrews McMeel Publishing"
+        editor: "Andrews McMeel Publishing",
+        categories: Bookstore.Catalog.list_categories_by_title(["Poetry"])
       },
       %{
         title: "Cosmos",
@@ -219,8 +219,8 @@ for book <- [
         pub_date: "1980-10-01",
         quantity: 7,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Science"]),
-        editor: "Random House"
+        editor: "Random House",
+        categories: Bookstore.Catalog.list_categories_by_title(["Science"])
       },
       %{
         title: "Thinking, Fast and Slow",
@@ -230,19 +230,8 @@ for book <- [
         pub_date: "2011-10-25",
         quantity: 2,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Psychology"]),
-        editor: "Farrar, Straus and Giroux"
-      },
-      %{
-        title: "Meditations",
-        author: "Marcus Aurelius",
-        isbn: "978-0-140-44523-5",
-        price: 7.75,
-        pub_date: "161-180",
-        quantity: 5,
-        img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Philosophy"]),
-        editor: "Various"
+        editor: "Farrar, Straus and Giroux",
+        categories: Bookstore.Catalog.list_categories_by_title(["Psychology"])
       },
       %{
         title: "The Joy of Cooking",
@@ -252,8 +241,8 @@ for book <- [
         pub_date: "1931-01-01",
         quantity: 9,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Cooking"]),
-        editor: "Bobbs-Merrill Company"
+        editor: "Bobbs-Merrill Company",
+        categories: Bookstore.Catalog.list_categories_by_title(["Cooking"])
       },
       %{
         title: "The Alchemist",
@@ -263,8 +252,8 @@ for book <- [
         pub_date: "1988-01-01",
         quantity: 3,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Fiction"]),
-        editor: "HarperOne"
+        editor: "HarperOne",
+        categories: Bookstore.Catalog.list_categories_by_title(["Fiction"])
       },
       %{
         title: "Into the Wild",
@@ -274,9 +263,291 @@ for book <- [
         pub_date: "1996-01-01",
         quantity: 6,
         img: nil,
-        categories: Bookstore.Catalog.list_categories_by_title(["Travel", "Adventure"]),
-        editor: "Villard Books"
+        editor: "Villard Books",
+        categories: Bookstore.Catalog.list_categories_by_title(["Travel", "Adventure"])
+      },
+      %{
+        title: "1984",
+        author: "George Orwell",
+        isbn: "978-0-452-28423-4",
+        price: 9.99,
+        pub_date: "1949-06-08",
+        quantity: 6,
+        img: nil,
+        editor: "Secker & Warburg",
+        categories: Bookstore.Catalog.list_categories_by_title(["Dystopian", "Classic"])
+      },
+      %{
+        title: "The Catcher in the Rye",
+        author: "J.D. Salinger",
+        isbn: "978-0-316-76948-4",
+        price: 8.50,
+        pub_date: "1951-07-16",
+        quantity: 3,
+        img: nil,
+        editor: "Little, Brown and Company",
+        categories: Bookstore.Catalog.list_categories_by_title(["Coming of Age", "Classic"])
+      },
+      %{
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        isbn: "978-0-7432-7356-5",
+        price: 10.25,
+        pub_date: "1925-04-10",
+        quantity: 5,
+        img: nil,
+        editor: "Charles Scribner's Sons",
+        categories: Bookstore.Catalog.list_categories_by_title(["Classic", "Literary Fiction"])
+      },
+      %{
+        title: "Lord of the Flies",
+        author: "William Golding",
+        isbn: "978-0-571-05686-5",
+        price: 11.75,
+        pub_date: "1954-09-17",
+        quantity: 7,
+        img: nil,
+        editor: "Faber and Faber",
+        categories: Bookstore.Catalog.list_categories_by_title(["Allegory", "Classic"])
+      },
+      %{
+        title: "Brave New World",
+        author: "Aldous Huxley",
+        isbn: "978-0-06-085052-4",
+        price: 12.99,
+        pub_date: "1932-01-01",
+        quantity: 4,
+        img: nil,
+        editor: "Chatto & Windus",
+        categories: Bookstore.Catalog.list_categories_by_title(["Dystopian", "Classic"])
+      },
+      %{
+        title: "The Picture of Dorian Gray",
+        author: "Oscar Wilde",
+        isbn: "978-1-4926-4561-2",
+        price: 7.25,
+        pub_date: "1890-07-01",
+        quantity: 8,
+        img: nil,
+        editor: "Lippincott's Monthly Magazine",
+        categories: Bookstore.Catalog.list_categories_by_title(["Gothic", "Classic"])
+      },
+      %{
+        title: "Fahrenheit 451",
+        author: "Ray Bradbury",
+        isbn: "978-1-4516-7331-9",
+        price: 10.99,
+        pub_date: "1953-10-19",
+        quantity: 6,
+        img: nil,
+        editor: "Ballantine Books",
+        categories: Bookstore.Catalog.list_categories_by_title(["Dystopian", "Science Fiction"])
+      },
+      %{
+        title: "The Road",
+        author: "Cormac McCarthy",
+        isbn: "978-0-307-38789-9",
+        price: 13.49,
+        pub_date: "2006-09-26",
+        quantity: 3,
+        img: nil,
+        editor: "Knopf",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Post-apocalyptic", "Literary Fiction"])
+      },
+      %{
+        title: "The Kite Runner",
+        author: "Khaled Hosseini",
+        isbn: "978-1-59448-000-3",
+        price: 11.49,
+        pub_date: "2003-05-29",
+        quantity: 5,
+        img: nil,
+        editor: "Riverhead Books",
+        categories: Bookstore.Catalog.list_categories_by_title(["Historical", "Literary Fiction"])
+      },
+      %{
+        title: "The Road Less Traveled",
+        author: "M. Scott Peck",
+        isbn: "978-0-684-84363-4",
+        price: 12.75,
+        pub_date: "1978-06-23",
+        quantity: 4,
+        img: nil,
+        editor: "Simon & Schuster",
+        categories: Bookstore.Catalog.list_categories_by_title(["Self-help", "Psychology"])
+      },
+      %{
+        title: "The Silent Patient",
+        author: "Alex Michaelides",
+        isbn: "978-1-250-30169-7",
+        price: 14.99,
+        pub_date: "2019-02-05",
+        quantity: 7,
+        img: nil,
+        editor: "Celadon Books",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Psychological Thriller", "Mystery"])
+      },
+      %{
+        title: "The Martian",
+        author: "Andy Weir",
+        isbn: "978-0-8041-3902-1",
+        price: 13.25,
+        pub_date: "2011-09-27",
+        quantity: 6,
+        img: nil,
+        editor: "Crown Publishing Group",
+        categories: Bookstore.Catalog.list_categories_by_title(["Science Fiction", "Survival"])
+      },
+      %{
+        title: "Gone Girl",
+        author: "Gillian Flynn",
+        isbn: "978-0-307-58837-1",
+        price: 9.99,
+        pub_date: "2012-06-05",
+        quantity: 9,
+        img: nil,
+        editor: "Crown Publishing Group",
+        categories: Bookstore.Catalog.list_categories_by_title(["Mystery", "Thriller"])
+      },
+      %{
+        title: "The Hunger Games",
+        author: "Suzanne Collins",
+        isbn: "978-0-439-02348-1",
+        price: 12.99,
+        pub_date: "2008-09-14",
+        quantity: 8,
+        img: nil,
+        editor: "Scholastic",
+        categories: Bookstore.Catalog.list_categories_by_title(["Young Adult", "Dystopian"])
+      },
+      %{
+        title: "The Help",
+        author: "Kathryn Stockett",
+        isbn: "978-0-399-15534-5",
+        price: 11.25,
+        pub_date: "2009-02-10",
+        quantity: 5,
+        img: nil,
+        editor: "Amy Einhorn Books",
+        categories: Bookstore.Catalog.list_categories_by_title(["Historical", "Fiction"])
+      },
+      %{
+        title: "Cien años de soledad",
+        author: "Gabriel García Márquez",
+        isbn: "978-84-376-0494-7",
+        price: 14.99,
+        pub_date: "1967-05-30",
+        quantity: 5,
+        img: nil,
+        editor: "Editorial Sudamericana",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Magic Realism", "Literary Fiction"])
+      },
+      %{
+        title: "Don Quijote de la Mancha",
+        author: "Miguel de Cervantes",
+        isbn: "978-84-670-0023-3",
+        price: 12.75,
+        pub_date: "1605-01-01",
+        quantity: 8,
+        img: nil,
+        editor: "Juan de la Cuesta",
+        categories: Bookstore.Catalog.list_categories_by_title(["Classic", "Adventure"])
+      },
+      %{
+        title: "La sombra del viento",
+        author: "Carlos Ruiz Zafón",
+        isbn: "978-84-322-1506-6",
+        price: 11.49,
+        pub_date: "2001-04-01",
+        quantity: 6,
+        img: nil,
+        editor: "Editorial Planeta",
+        categories: Bookstore.Catalog.list_categories_by_title(["Mystery", "Historical Fiction"])
+      },
+      %{
+        title: "Rayuela",
+        author: "Julio Cortázar",
+        isbn: "978-84-204-0225-2",
+        price: 9.99,
+        pub_date: "1963-07-28",
+        quantity: 7,
+        img: nil,
+        editor: "Editorial Sudamericana",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Experimental", "Literary Fiction"])
+      },
+      %{
+        title: "La casa de los espíritus",
+        author: "Isabel Allende",
+        isbn: "978-84-663-1324-4",
+        price: 13.25,
+        pub_date: "1982-06-01",
+        quantity: 4,
+        img: nil,
+        editor: "Plaza & Janés",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Magical Realism", "Literary Fiction"])
+      },
+      %{
+        title: "El amor en los tiempos del cólera",
+        author: "Gabriel García Márquez",
+        isbn: "978-84-376-0194-6",
+        price: 11.99,
+        pub_date: "1985-05-15",
+        quantity: 6,
+        img: nil,
+        editor: "Editorial Sudamericana",
+        categories: Bookstore.Catalog.list_categories_by_title(["Romance", "Literary Fiction"])
+      },
+      %{
+        title: "Como agua para chocolate",
+        author: "Laura Esquivel",
+        isbn: "978-84-8306-030-0",
+        price: 10.50,
+        pub_date: "1989-01-01",
+        quantity: 3,
+        img: nil,
+        editor: "Editorial Diana",
+        categories: Bookstore.Catalog.list_categories_by_title(["Magic Realism", "Romance"])
+      },
+      %{
+        title: "El laberinto de los espíritus",
+        author: "Carlos Ruiz Zafón",
+        isbn: "978-84-204-2703-4",
+        price: 14.75,
+        pub_date: "2016-11-17",
+        quantity: 5,
+        img: nil,
+        editor: "Editorial Planeta",
+        categories: Bookstore.Catalog.list_categories_by_title(["Mystery", "Historical Fiction"])
+      },
+      %{
+        title: "La ciudad y los perros",
+        author: "Mario Vargas Llosa",
+        isbn: "978-84-9759-278-1",
+        price: 12.99,
+        pub_date: "1963-10-01",
+        quantity: 7,
+        img: nil,
+        editor: "Editorial Losada",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Literary Fiction", "Coming of Age"])
+      },
+      %{
+        title: "Los renglones torcidos de Dios",
+        author: "Torcuato Luca de Tena",
+        isbn: "978-84-663-0446-5",
+        price: 9.25,
+        pub_date: "1979-09-30",
+        quantity: 4,
+        img: nil,
+        editor: "Plaza & Janés",
+        categories:
+          Bookstore.Catalog.list_categories_by_title(["Mystery", "Psychological Thriller"])
       }
     ] do
-  {:ok, _} = Bookstore.Catalog.create_book(book)
+  {:ok, _} = Bookstore.Catalog.create_book(attrs)
 end

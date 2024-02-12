@@ -2,6 +2,8 @@ defmodule BookstoreWeb.BooksLive do
   use BookstoreWeb, :live_view
   alias Bookstore.Catalog
 
+  embed_templates "/*"
+
   def mount(_, _, socket) do
     {:ok,
      socket
@@ -22,19 +24,18 @@ defmodule BookstoreWeb.BooksLive do
         if(@page == 1, do: "pt-10", else: "pt-[calc(200vh)]")
       ]}
     >
-      <li :for={{id, book} <- @streams.books}
-      id={id}>
-      <.list>
-        <:item title="Title"><%= book.title %></:item>
-        <:item title="Author"><%= book.author %></:item>
-        <:item title="ISBN"><%= book.isbn %></:item>
-        <:item title="Publication date"><%= book.pub_date %></:item>
-        <:item title="Price"><%= book.price %></:item>
-        <:item title="Quantity"><%= book.quantity %></:item>
-        <:item title="Editor"><%= book.editor %></:item>
-        <:item title="Image"><%= book.img %></:item>
-        <:item title="Categories"><%= Enum.map(book.categories, & &1.title) %></:item>
-      </.list>
+      <li :for={{id, book} <- @streams.books} id={id}>
+        <.list>
+          <:item title="Title"><%= book.title %></:item>
+          <:item title="Author"><%= book.author %></:item>
+          <:item title="ISBN"><%= book.isbn %></:item>
+          <:item title="Publication date"><%= book.pub_date %></:item>
+          <:item title="Price"><%= book.price %></:item>
+          <:item title="Quantity"><%= book.quantity %></:item>
+          <:item title="Editor"><%= book.editor %></:item>
+          <:item title="Image"><%= book.img %></:item>
+          <:item title="Categories"><%= Enum.map(book.categories, & &1.title) %></:item>
+        </.list>
       </li>
     </ul>
     <div :if={@end_of_timeline?} class="mt-5 text-[50px] text-center">
