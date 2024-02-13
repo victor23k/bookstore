@@ -456,6 +456,10 @@ defmodule BookstoreWeb.CoreComponents do
   attr :rows, :list, required: true
   attr :row_id, :any, default: nil, doc: "the function for generating the row id"
   attr :row_click, :any, default: nil, doc: "the function for handling phx-click on each row"
+  attr :viewport_bottom, :string
+  attr :viewport_top, :string
+  attr :end_of_timeline?, :boolean
+  attr :table_body_class, :list
 
   attr :row_item, :any,
     default: &Function.identity/1,
@@ -487,7 +491,15 @@ defmodule BookstoreWeb.CoreComponents do
         <tbody
           id={@id}
           phx-update={match?(%Phoenix.LiveView.LiveStream{}, @rows) && "stream"}
-          class="relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700"
+          phx-viewport-bottom={@viewport_bottom}
+          phx-viewport-top={@viewport_top}
+          phx-page-loading
+          class={
+            @table_body_class ++
+              [
+                "relative divide-y divide-zinc-100 border-t border-zinc-200 text-sm leading-6 text-zinc-700"
+              ]
+          }
         >
           <tr :for={row <- @rows} id={@row_id && @row_id.(row)} class="group hover:bg-zinc-50">
             <td
@@ -515,6 +527,7 @@ defmodule BookstoreWeb.CoreComponents do
             </td>
           </tr>
         </tbody>
+        <div :if={@end_of_timeline?}>End of table</div>
       </table>
     </div>
     """
