@@ -29,7 +29,9 @@
   <:col :let={{_id, book}} label="Quantity"><%= book.quantity %></:col>
   <:col :let={{_id, book}} label="Editor"><%= book.editor %></:col>
   <:col :let={{_id, book}} label="Img"><%= book.img %></:col>
-  <:col :let={{_id, book}} label="Categories"><%= Enum.map(book.categories, & &1.title) %></:col>
+  <:col :let={{_id, book}} label="Categories"><%= Enum.reduce(book.categories, "", fn cat, acc -> acc <> cat.title <> ", " end)
+    |> String.slice(0..-3)
+ %></:col>
   <:action :let={{_id, book}}>
     <div class="sr-only">
       <.link navigate={~p"/books/#{book}"}>Show</.link>
