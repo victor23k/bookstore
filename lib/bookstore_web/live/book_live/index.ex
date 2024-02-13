@@ -20,13 +20,16 @@ defmodule BookstoreWeb.BookLive.Index do
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
+    book = Catalog.get_book!(id)
+
     socket
     |> assign(:page_title, "Edit Book")
-    |> assign(:book, Catalog.get_book!(id))
-    |> assign(:changeset, Catalog.get_book!(id) |> Catalog.change_book())
+    |> assign(:book, book)
+    |> assign(:changeset, Catalog.change_book(book))
   end
 
   defp apply_action(socket, :new, _params) do
+    IO.puts("new")
     socket
     |> assign(:page_title, "New Book")
     |> assign(:book, %Book{})

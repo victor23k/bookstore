@@ -32,7 +32,7 @@ defmodule Bookstore.Catalog do
 
   """
   def list_books_page(limit \\ 5, offset) do
-    query = from Book, limit: ^limit, offset: ^offset
+    query = from Book, limit: ^limit, offset: ^offset, order_by: :id
 
     Repo.all(query)
     |> Repo.preload(:categories)

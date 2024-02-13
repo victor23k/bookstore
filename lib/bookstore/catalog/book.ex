@@ -24,7 +24,7 @@ defmodule Bookstore.Catalog.Book do
     field :pub_date, :date
     field :price, :decimal
     field :quantity, :integer
-    field :img, :binary
+    field :img, :string
 
     many_to_many :categories, Category, join_through: "book_categories", on_replace: :delete
 
@@ -35,6 +35,7 @@ defmodule Bookstore.Catalog.Book do
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :author, :isbn, :pub_date, :price, :quantity, :editor, :img])
+    |> cast_assoc(:categories)
     |> validate_required([:title, :author, :isbn, :pub_date, :price, :quantity, :editor])
   end
 end

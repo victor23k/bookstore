@@ -4,6 +4,14 @@ defmodule BookstoreWeb.BookLive.FormComponent do
   alias Bookstore.Catalog
 
   @impl true
+  def mount(socket) do
+    {:ok,
+     socket
+     |> assign(:uploaded_files, [])
+     |> allow_upload(:cover, accept: ~w(.jpg .jpeg .png .webp), max_entries: 1)}
+  end
+
+  @impl true
   def render(assigns) do
     ~H"""
     <div>
@@ -11,7 +19,6 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         <%= @title %>
         <:subtitle>Use this form to manage book records in your database.</:subtitle>
       </.header>
-
       <.simple_form
         for={@form}
         id="book-form"
@@ -26,13 +33,40 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         <.input field={@form[:price]} type="number" label="Price" step="any" />
         <.input field={@form[:quantity]} type="number" label="Quantity" />
         <.input field={@form[:editor]} type="text" label="Editor" />
+        <.input field={@form[:img]} type="text" label="Image" hidden/>
+
+        <section phx-drop-target={@uploads.cover.ref}>
+        <img src={@changeset.data.img} />
+          <.live_file_input upload={@uploads.cover} />
+          <%= for entry <- @uploads.cover.entries do %>
+            <article class="upload-entry">
+              <figure>
+                <.live_img_preview entry={entry} />
+                <figcaption><%= entry.client_name %></figcaption>
+              </figure>
+
+              <%!-- entry.progress will update automatically for in-flight entries --%>
+              <progress value={entry.progress} max="100"><%= entry.progress %>%</progress>
+
+              <%!-- a regular click event whose handler will invoke Phoenix.LiveView.cancel_upload/3 --%>
+              <button
+                type="button"
+                phx-click="cancel-upload"
+                phx-value-ref={entry.ref}
+                aria-label="cancel"
+              >
+                &times;
+              </button>
+            </article>
+          <% end %>
+        </section>
 
         <.input
           field={@form[:categories_ids]}
           type="select"
           label="Category"
           multiple={true}
-          options={category_opts(@changeset)}
+          options={category_opts(@changeset.data.categories)}
         />
         <:actions>
           <.button phx-disable-with="Saving...">Save Book</.button>
@@ -63,18 +97,36 @@ defmodule BookstoreWeb.BookLive.FormComponent do
   end
 
   def handle_event("save", %{"book" => book_params}, socket) do
-    save_book(socket, socket.assigns.action, book_params)
+    uploaded_files =
+      consume_uploaded_entries(socket, :cover, fn %{path: path}, _entry ->
+        dest = Path.join(Application.app_dir(:bookstore, "priv/static/uploads"), Path.basename(path))
+        # You will need to create `priv/static/uploads` for `File.cp!/2` to work.
+        File.cp!(path, dest)
+        {:ok, ~p"/uploads/#{Path.basename(dest)}"}
+      end)
+
+    book_params = Map.put(book_params, "img", List.first(uploaded_files))
+
+    update(socket, :uploaded_files, &(&1 ++ uploaded_files))
+    |> save_book(socket.assigns.action, book_params)
   end
 
-  def category_opts(changeset) do
+  @impl true
+  def handle_event("cancel-upload", %{"ref" => ref}, socket) do
+    {:noreply, cancel_upload(socket, :cover, ref)}
+  end
+
+  def category_opts(categories) do
     existing_ids =
-      changeset
-      |> Ecto.Changeset.get_change(:categories, [])
-      |> Enum.map(& &1.data.id)
+      categories
+      |> Enum.map(& &1.id)
 
     for category <- Bookstore.Catalog.list_categories(),
         do: [key: category.title, value: category.id, selected: category.id in existing_ids]
   end
+
+  def error_to_string(:too_large), do: "Too large"
+  def error_to_string(:not_accepted), do: "You have selected an unacceptable file type"
 
   defp save_book(socket, :edit, book_params) do
     case Catalog.update_book(socket.assigns.book, book_params) do
