@@ -14,6 +14,7 @@ defmodule Bookstore.Catalog.Book do
     Cover image
     Categories <-> Category
   """
+  alias Bookstore.People.Author
   alias Bookstore.Catalog.Category
 
   schema "books" do
@@ -27,6 +28,7 @@ defmodule Bookstore.Catalog.Book do
     field :img, :string
 
     many_to_many :categories, Category, join_through: "book_categories", on_replace: :delete
+    many_to_many :authors, Author, join_through: "books_authors", on_replace: :delete
 
     timestamps(type: :utc_datetime)
   end
@@ -35,7 +37,6 @@ defmodule Bookstore.Catalog.Book do
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :author, :isbn, :pub_date, :price, :quantity, :editor, :img])
-    |> cast_assoc(:categories)
     |> validate_required([:title, :author, :isbn, :pub_date, :price, :quantity, :editor])
   end
 end

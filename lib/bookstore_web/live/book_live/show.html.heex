@@ -10,6 +10,10 @@
 
 <.list>
   <:item title="Title"><%= @book.title %></:item>
+  <:item title="Authors">
+    <%= Enum.reduce(@book.authors, "", fn author, acc -> acc <> author.name <> author.surname <> ", " end)
+    |> String.slice(0..-3//1) %>
+  </:item>
   <:item title="Isbn"><%= @book.isbn %></:item>
   <:item title="Pub date"><%= @book.pub_date %></:item>
   <:item title="Price"><%= @book.price %></:item>
@@ -18,7 +22,7 @@
   <:item title="Img"><img src={@book.img} /></:item>
   <:item title="Categories">
     <%= Enum.reduce(@book.categories, "", fn cat, acc -> acc <> cat.title <> ", " end)
-    |> String.slice(0..-3) %>
+    |> String.slice(0..-3//1) %>
   </:item>
 </.list>
 

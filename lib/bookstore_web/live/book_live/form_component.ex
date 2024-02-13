@@ -1,4 +1,5 @@
 defmodule BookstoreWeb.BookLive.FormComponent do
+  alias Bookstore.People
   use BookstoreWeb, :live_component
 
   alias Bookstore.Catalog
@@ -27,7 +28,13 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:title]} type="text" label="Title" />
-        <.input field={@form[:author]} type="text" label="Author" />
+        <.input
+          field={@form[:authors_ids]}
+          type="select"
+          label="Authors"
+          multiple={true}
+          options={author_opts(@changeset.data.authors)}
+        />
         <.input field={@form[:isbn]} type="text" label="ISBN" />
         <.input field={@form[:pub_date]} type="date" label="Publication date" />
         <.input field={@form[:price]} type="number" label="Price" step="any" />
@@ -123,6 +130,15 @@ defmodule BookstoreWeb.BookLive.FormComponent do
 
     for category <- Bookstore.Catalog.list_categories(),
         do: [key: category.title, value: category.id, selected: category.id in existing_ids]
+  end
+
+  def author_opts(authors) do
+    existing_ids =
+      authors
+      |> Enum.map(& &1.id)
+
+    for author <- People.list_authors(),
+        do: [key: author.surname, value: author.id, selected: author.id in existing_ids]
   end
 
   def error_to_string(:too_large), do: "Too large"

@@ -4,6 +4,7 @@ defmodule Bookstore.Catalog do
   """
 
   import Ecto.Query, warn: false
+  alias Bookstore.People
   alias Bookstore.Repo
 
   alias Bookstore.Catalog.Book
@@ -20,6 +21,7 @@ defmodule Bookstore.Catalog do
   def list_books do
     Repo.all(Book)
     |> Repo.preload(:categories)
+    |> Repo.preload(:authors)
   end
 
   @doc """
@@ -36,6 +38,7 @@ defmodule Bookstore.Catalog do
 
     Repo.all(query)
     |> Repo.preload(:categories)
+    |> Repo.preload(:authors)
   end
 
   @doc """
@@ -55,6 +58,7 @@ defmodule Bookstore.Catalog do
   def get_book!(id) do
     Repo.get!(Book, id)
     |> Repo.preload(:categories)
+    |> Repo.preload(:authors)
   end
 
   @doc """
@@ -119,29 +123,28 @@ defmodule Bookstore.Catalog do
 
   """
   def change_book(%Book{} = book, attrs \\ %{}) do
-    categories =
-      case attrs do
-        %{categories: categories} ->
-          categories
-
-        %{"categories_ids" => categories_ids} ->
-          parse_categories_ids(categories_ids)
-          |> list_categories_by_id()
-
-        _ ->
-          nil
-      end
+    categories = get_categories_from_attrs(attrs)
+    authors = People.get_authors_from_attrs(attrs)
 
     book
     |> Repo.preload(:categories)
+    |> Repo.preload(:authors)
     |> Book.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:categories, categories)
+    |> Ecto.Changeset.put_assoc(:authors, authors)
   end
 
-  defp parse_categories_ids(nil), do: nil
+  defp get_categories_from_attrs(%{categories: categories}), do: categories
+  defp get_categories_from_attrs(%{"categories_ids" => categories_ids}) do
+    parse_ids(categories_ids)
+    |> list_categories_by_id()
+  end
+  defp get_categories_from_attrs(_), do: nil
 
-  defp parse_categories_ids(categories_ids) when is_list(categories_ids) do
-    categories_ids
+  defp parse_ids(nil), do: nil
+
+  defp parse_ids(id_list) when is_list(id_list) do
+    id_list
     |> Enum.map(&String.to_integer(&1))
   end
 
