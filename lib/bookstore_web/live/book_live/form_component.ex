@@ -40,10 +40,10 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         <.input field={@form[:price]} type="number" label="Price" step="any" />
         <.input field={@form[:quantity]} type="number" label="Quantity" />
         <.input field={@form[:editor]} type="text" label="Editor" />
-        <.input field={@form[:img]} type="text" label="Image" hidden/>
+        <.input field={@form[:img]} type="text" label="Image" hidden />
 
         <section phx-drop-target={@uploads.cover.ref}>
-        <img src={@changeset.data.img} />
+          <img src={@changeset.data.img} />
           <.live_file_input upload={@uploads.cover} />
           <%= for entry <- @uploads.cover.entries do %>
             <article class="upload-entry">
@@ -106,8 +106,9 @@ defmodule BookstoreWeb.BookLive.FormComponent do
   def handle_event("save", %{"book" => book_params}, socket) do
     uploaded_files =
       consume_uploaded_entries(socket, :cover, fn %{path: path}, _entry ->
-        dest = Path.join(Application.app_dir(:bookstore, "priv/static/uploads"), Path.basename(path))
-        # You will need to create `priv/static/uploads` for `File.cp!/2` to work.
+        dest =
+          Path.join(Application.app_dir(:bookstore, "priv/static/uploads"), Path.basename(path))
+
         File.cp!(path, dest)
         {:ok, ~p"/uploads/#{Path.basename(dest)}"}
       end)

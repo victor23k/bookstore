@@ -135,10 +135,12 @@ defmodule Bookstore.Catalog do
   end
 
   defp get_categories_from_attrs(%{categories: categories}), do: categories
+
   defp get_categories_from_attrs(%{"categories_ids" => categories_ids}) do
     parse_ids(categories_ids)
     |> list_categories_by_id()
   end
+
   defp get_categories_from_attrs(_), do: nil
 
   defp parse_ids(nil), do: nil

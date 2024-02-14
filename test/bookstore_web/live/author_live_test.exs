@@ -4,9 +4,30 @@ defmodule BookstoreWeb.AuthorLiveTest do
   import Phoenix.LiveViewTest
   import Bookstore.PeopleFixtures
 
-  @create_attrs %{name: "some name", dead: "2024-02-12", surname: "some surname", born: "2024-02-12", birth_place: "some birth_place", death_place: "some death_place"}
-  @update_attrs %{name: "some updated name", dead: "2024-02-13", surname: "some updated surname", born: "2024-02-13", birth_place: "some updated birth_place", death_place: "some updated death_place"}
-  @invalid_attrs %{name: nil, dead: nil, surname: nil, born: nil, birth_place: nil, death_place: nil}
+  @create_attrs %{
+    name: "some name",
+    dead: "2024-02-12",
+    surname: "some surname",
+    born: "2024-02-12",
+    birth_place: "some birth_place",
+    death_place: "some death_place"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    dead: "2024-02-13",
+    surname: "some updated surname",
+    born: "2024-02-13",
+    birth_place: "some updated birth_place",
+    death_place: "some updated death_place"
+  }
+  @invalid_attrs %{
+    name: nil,
+    dead: nil,
+    surname: nil,
+    born: nil,
+    birth_place: nil,
+    death_place: nil
+  }
 
   defp create_author(_) do
     author = author_fixture()
