@@ -29,7 +29,6 @@ defmodule BookstoreWeb.BookLive.Index do
   end
 
   defp apply_action(socket, :new, _params) do
-    IO.puts("new")
     socket
     |> assign(:page_title, "New Book")
     |> assign(:book, %Book{})
@@ -42,7 +41,6 @@ defmodule BookstoreWeb.BookLive.Index do
     |> assign(:book, nil)
     |> assign(:changeset, %Book{} |> Catalog.change_book())
   end
-
   defp paginate_books(socket, new_page) when new_page >= 1 do
     %{per_page: per_page, page: cur_page} = socket.assigns
     books = Catalog.list_books_page(per_page, (new_page - 1) * per_page)
@@ -81,4 +79,10 @@ defmodule BookstoreWeb.BookLive.Index do
       {:noreply, socket}
     end
   end
+
+  def handle_event("delete", %{"id" => book_id}, socket) do
+    Catalog.delete_book(book_id)
+    {:noreply, paginate_books(socket, socket.assigns.page)}
+  end
+
 end
