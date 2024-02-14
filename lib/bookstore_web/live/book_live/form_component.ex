@@ -113,7 +113,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         {:ok, ~p"/uploads/#{Path.basename(dest)}"}
       end)
 
-    book_params = Map.put(book_params, "img", List.first(uploaded_files))
+    book_params = Map.put(book_params, "img", image_to_save(book_params, uploaded_files))
 
     update(socket, :uploaded_files, &(&1 ++ uploaded_files))
     |> save_book(socket.assigns.action, book_params)
@@ -180,4 +180,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
   end
 
   defp notify_parent(msg), do: send(self(), {__MODULE__, msg})
+
+  defp image_to_save(book_params, []), do: Map.get(book_params, "img", "")
+  defp image_to_save(_, [uploaded_image]), do: uploaded_image
 end
