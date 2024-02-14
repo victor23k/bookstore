@@ -22,7 +22,7 @@
   <:item title="Price"><%= @book.price %></:item>
   <:item title="Quantity"><%= @book.quantity %></:item>
   <:item title="Editor"><%= @book.editor %></:item>
-  <:item title="Cover"><img src={@book.img} /></:item>
+  <:item title="Cover"><img height="260" width="125" src={@book.img} /></:item>
   <:item title="Categories">
     <span :for={category <- @book.categories}>
       <%= category.title %>,

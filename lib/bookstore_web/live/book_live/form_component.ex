@@ -43,7 +43,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         <.input field={@form[:img]} type="text" label="Cover" hidden />
 
         <section phx-drop-target={@uploads.cover.ref}>
-          <img src={@changeset.data.img} />
+          <img height="260" width="125" src={@changeset.data.img} />
           <.live_file_input upload={@uploads.cover} />
           <%= for entry <- @uploads.cover.entries do %>
             <article class="upload-entry">
