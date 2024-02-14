@@ -114,9 +114,14 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
-  @spec delete_book(Book.t()) :: {:ok, Book.t()} | {:error, Ecto.Changeset.t()}
+  @spec delete_book(Book.t() | pos_integer()) :: {:ok, Book.t()} | {:error, Ecto.Changeset.t()}
   def delete_book(%Book{} = book) do
     Repo.delete(book)
+  end
+
+  def delete_book(book_id) when is_integer(book_id) do
+    Repo.get(Book, book_id)
+    |> Repo.delete()
   end
 
   @doc """
