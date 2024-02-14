@@ -22,19 +22,21 @@ defmodule BookstoreWeb.Router do
 
     get "/", PageController, :home
 
-    live "/books", BookLive.Index, :index
-    live "/books/new", BookLive.Index, :new
-    live "/books/:id/edit", BookLive.Index, :edit
+    live_session :authenticated, on_mount: [{BookstoreWeb.UserAuth, :ensure_authenticated}] do
+      live "/books", BookLive.Index, :index
+      live "/books/new", BookLive.Index, :new
+      live "/books/:id/edit", BookLive.Index, :edit
 
-    live "/books/:id", BookLive.Show, :show
-    live "/books/:id/show/edit", BookLive.Show, :edit
+      live "/books/:id", BookLive.Show, :show
+      live "/books/:id/show/edit", BookLive.Show, :edit
 
-    live "/authors", AuthorLive.Index, :index
-    live "/authors/new", AuthorLive.Index, :new
-    live "/authors/:id/edit", AuthorLive.Index, :edit
+      live "/authors", AuthorLive.Index, :index
+      live "/authors/new", AuthorLive.Index, :new
+      live "/authors/:id/edit", AuthorLive.Index, :edit
 
-    live "/authors/:id", AuthorLive.Show, :show
-    live "/authors/:id/show/edit", AuthorLive.Show, :edit
+      live "/authors/:id", AuthorLive.Show, :show
+      live "/authors/:id/show/edit", AuthorLive.Show, :edit
+    end
   end
 
   # Other scopes may use custom stacks.
