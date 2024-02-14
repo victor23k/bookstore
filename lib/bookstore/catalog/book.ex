@@ -19,7 +19,6 @@ defmodule Bookstore.Catalog.Book do
 
   schema "books" do
     field :title, :string
-    field :author, :string
     field :editor, :string
     field :isbn, :string
     field :pub_date, :date
@@ -36,7 +35,10 @@ defmodule Bookstore.Catalog.Book do
   @doc false
   def changeset(book, attrs) do
     book
-    |> cast(attrs, [:title, :author, :isbn, :pub_date, :price, :quantity, :editor, :img])
-    |> validate_required([:title, :author, :isbn, :pub_date, :price, :quantity, :editor])
+    |> cast(attrs, [:title, :isbn, :pub_date, :price, :quantity, :editor, :img])
+    |> validate_required([:title, :isbn, :pub_date, :price, :quantity, :editor])
+    |> validate_format(:isbn, ~r/^(?:\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d)$/)
+    |> validate_length(:isbn, min: 10)
+    |> validate_length(:isbn, max: 17)
   end
 end
