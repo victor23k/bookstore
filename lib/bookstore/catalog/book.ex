@@ -40,5 +40,20 @@ defmodule Bookstore.Catalog.Book do
     |> validate_format(:isbn, ~r/^(?:\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d)$/)
     |> validate_length(:isbn, min: 10)
     |> validate_length(:isbn, max: 17)
+    |> validate_pub_date()
+  end
+
+  defp validate_pub_date(changeset) do
+    validate_change(changeset, :pub_date, fn :pub_date, pub_date ->
+      case DateTime.utc_now()
+           |> DateTime.to_date()
+           |> Date.compare(pub_date) do
+        :lt ->
+          [pub_date: "cannot be after today"]
+
+        _ ->
+          []
+      end
+    end)
   end
 end
