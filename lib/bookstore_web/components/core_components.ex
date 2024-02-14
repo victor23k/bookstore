@@ -458,7 +458,6 @@ defmodule BookstoreWeb.CoreComponents do
   attr :row_click, :any, default: nil, doc: "the function for handling phx-click on each row"
   attr :viewport_bottom, :string
   attr :viewport_top, :string
-  attr :end_of_timeline?, :boolean
   attr :table_body_class, :list
 
   attr :row_item, :any,
@@ -527,7 +526,6 @@ defmodule BookstoreWeb.CoreComponents do
             </td>
           </tr>
         </tbody>
-        <div :if={@end_of_timeline?}>End of table</div>
       </table>
     </div>
     """
