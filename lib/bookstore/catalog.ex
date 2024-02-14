@@ -18,6 +18,7 @@ defmodule Bookstore.Catalog do
       [%Book{}, ...]
 
   """
+  @spec list_books() :: [Book.t()]
   def list_books do
     Repo.all(Book)
     |> Repo.preload(:categories)
@@ -33,6 +34,7 @@ defmodule Bookstore.Catalog do
       [%Book{}, ...]
 
   """
+  @spec list_books_page(pos_integer(), pos_integer()) :: [Book.t()]
   def list_books_page(limit \\ 5, offset) do
     query = from Book, limit: ^limit, offset: ^offset, order_by: :id
 
@@ -55,6 +57,7 @@ defmodule Bookstore.Catalog do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_book!(pos_integer()) :: Book.t()
   def get_book!(id) do
     Repo.get!(Book, id)
     |> Repo.preload(:categories)
@@ -73,6 +76,7 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_book(map()) :: {:ok, Book.t()} | {:error, Ecto.Changeset.t()}
   def create_book(attrs \\ %{}) do
     %Book{}
     |> change_book(attrs)
@@ -91,6 +95,7 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_book(Book.t(), map()) :: {:ok, Book.t()} | {:error, Ecto.Changeset.t()}
   def update_book(%Book{} = book, attrs) do
     book
     |> change_book(attrs)
@@ -109,6 +114,7 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec delete_book(Book.t()) :: {:ok, Book.t()} | {:error, Ecto.Changeset.t()}
   def delete_book(%Book{} = book) do
     Repo.delete(book)
   end
@@ -122,6 +128,7 @@ defmodule Bookstore.Catalog do
       %Ecto.Changeset{data: %Book{}}
 
   """
+  @spec change_book(Book.t(), map()) :: Ecto.Changeset.t()
   def change_book(%Book{} = book, attrs \\ %{}) do
     categories = get_categories_from_attrs(attrs)
     authors = People.get_authors_from_attrs(attrs)
@@ -161,6 +168,7 @@ defmodule Bookstore.Catalog do
       [%Category{}, ...]
 
   """
+  @spec list_categories() :: [Category.t()]
   def list_categories do
     Repo.all(Category)
   end
@@ -179,6 +187,7 @@ defmodule Bookstore.Catalog do
       ** (Ecto.NoResultsError)
 
   """
+  @spec get_category!(pos_integer()) :: Category.t()
   def get_category!(id), do: Repo.get!(Category, id)
 
   @doc """
@@ -193,6 +202,7 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec create_category(map()) :: {:ok, Category.t()} | {:error, Ecto.Changeset.t()}
   def create_category(attrs \\ %{}) do
     %Category{}
     |> Category.changeset(attrs)
@@ -211,6 +221,7 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec update_category(Category.t(), map()) :: {:ok, Category.t()} | {:error, Ecto.Changeset.t()}
   def update_category(%Category{} = category, attrs) do
     category
     |> Category.changeset(attrs)
@@ -229,6 +240,7 @@ defmodule Bookstore.Catalog do
       {:error, %Ecto.Changeset{}}
 
   """
+  @spec delete_category(Category.t()) :: {:ok, Category.t()} | {:error, Ecto.Changeset.t()}
   def delete_category(%Category{} = category) do
     Repo.delete(category)
   end
@@ -242,6 +254,7 @@ defmodule Bookstore.Catalog do
       %Ecto.Changeset{data: %Category{}}
 
   """
+  @spec change_category(Category.t(), map()) :: Ecto.Changeset.t()
   def change_category(%Category{} = category, attrs \\ %{}) do
     Category.changeset(category, attrs)
   end
@@ -249,6 +262,7 @@ defmodule Bookstore.Catalog do
   @doc """
   Returns the list of categories by id list
   """
+  @spec list_categories_by_id(nil | [pos_integer()]) :: [] | [Category.t()]
   def list_categories_by_id(nil), do: []
 
   def list_categories_by_id(category_ids) do
@@ -258,6 +272,7 @@ defmodule Bookstore.Catalog do
   @doc """
   Returns the list of categories by title list
   """
+  @spec list_categories_by_title(nil | [String.t()]) :: [] | [Category.t()]
   def list_categories_by_title(nil), do: []
 
   def list_categories_by_title(category_titles) do
@@ -267,6 +282,7 @@ defmodule Bookstore.Catalog do
   @doc """
   Returns the list of categories ids by title list
   """
+  @spec list_categories_ids_by_title(nil | [String.t()]) :: [] | [String.t()]
   def list_categories_ids_by_title(nil), do: []
 
   def list_categories_ids_by_title(category_titles) do
