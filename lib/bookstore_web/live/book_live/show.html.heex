@@ -11,10 +11,11 @@
 <.list>
   <:item title="Title"><%= @book.title %></:item>
   <:item title="Authors">
-    <%= Enum.reduce(@book.authors, "", fn author, acc ->
-      acc <> author.name <> " " <> author.surname <> ", "
-    end)
-    |> String.slice(0..-3//1) %>
+    <span :for={author <- @book.authors}>
+      <.link patch={~p"/authors/#{author.id}"}>
+        <%= author.name %> <%= author.surname %>,
+      </.link>
+    </span>
   </:item>
   <:item title="ISBN"><%= @book.isbn %></:item>
   <:item title="Publication date"><%= @book.pub_date %></:item>
@@ -23,8 +24,9 @@
   <:item title="Editor"><%= @book.editor %></:item>
   <:item title="Cover"><img src={@book.img} /></:item>
   <:item title="Categories">
-    <%= Enum.reduce(@book.categories, "", fn cat, acc -> acc <> cat.title <> ", " end)
-    |> String.slice(0..-3//1) %>
+    <span :for={category <- @book.categories}>
+      <%= category.title %>,
+    </span>
   </:item>
 </.list>
 
