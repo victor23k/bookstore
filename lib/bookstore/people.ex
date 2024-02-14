@@ -125,5 +125,10 @@ defmodule Bookstore.People do
     |> list_authors_by_id()
   end
 
+  def get_authors_from_attrs(%{authors_ids: authors_ids}) do
+    parse_ids(authors_ids)
+    |> list_authors_by_id()
+  end
+
   def get_authors_from_attrs(_), do: nil
 end

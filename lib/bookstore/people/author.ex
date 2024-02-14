@@ -20,6 +20,6 @@ defmodule Bookstore.People.Author do
   def changeset(author, attrs) do
     author
     |> cast(attrs, [:name, :surname, :born, :dead, :birth_place, :death_place])
-    |> validate_required([:name, :surname, :born, :dead, :birth_place, :death_place])
+    |> validate_required([:name, :surname, :born, :birth_place])
   end
 end
