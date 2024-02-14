@@ -27,12 +27,12 @@
     end)
     |> String.slice(0..-3//1) %>
   </:col>
-  <:col :let={{_id, book}} label="Isbn"><%= book.isbn %></:col>
-  <:col :let={{_id, book}} label="Pub date"><%= book.pub_date %></:col>
+  <:col :let={{_id, book}} label="ISBN"><%= book.isbn %></:col>
+  <:col :let={{_id, book}} label="Publication date"><%= book.pub_date %></:col>
   <:col :let={{_id, book}} label="Price"><%= book.price %></:col>
   <:col :let={{_id, book}} label="Quantity"><%= book.quantity %></:col>
   <:col :let={{_id, book}} label="Editor"><%= book.editor %></:col>
-  <:col :let={{_id, book}} label="Img"><img src={book.img} /></:col>
+  <:col :let={{_id, book}} label="Cover"><img src={book.img} /></:col>
   <:col :let={{_id, book}} label="Categories">
     <%= Enum.reduce(book.categories, "", fn cat, acc -> acc <> cat.title <> ", " end)
     |> String.slice(0..-3//1) %>

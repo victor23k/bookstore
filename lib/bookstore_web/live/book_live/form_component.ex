@@ -40,7 +40,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         <.input field={@form[:price]} type="number" label="Price" step="any" />
         <.input field={@form[:quantity]} type="number" label="Quantity" />
         <.input field={@form[:editor]} type="text" label="Editor" />
-        <.input field={@form[:img]} type="text" label="Image" hidden />
+        <.input field={@form[:img]} type="text" label="Cover" hidden />
 
         <section phx-drop-target={@uploads.cover.ref}>
           <img src={@changeset.data.img} />
