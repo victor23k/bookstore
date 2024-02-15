@@ -2,10 +2,9 @@
 
 ## Setup
 
-Migrations are already executed on container startup.
-
-To load test data, run the following:
+To execute migrations and load test data, run the following:
 ```
+docker compose exec server mix ecto.migrate
 docker compose exec server mix run priv/repo/seeds.exs
 ```
 
