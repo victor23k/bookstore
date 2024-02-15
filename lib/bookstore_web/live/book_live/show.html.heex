@@ -13,7 +13,7 @@
   <:item title="Authors">
     <span :for={author <- @book.authors}>
       <.link patch={~p"/authors/#{author.id}"}>
-        <%= author.name %> <%= author.surname %>,
+        <%= "#{author.name} #{author.surname}, "%>
       </.link>
     </span>
   </:item>
@@ -24,9 +24,7 @@
   <:item title="Editor"><%= @book.editor %></:item>
   <:item title="Cover"><img height="260" width="125" src={@book.img} /></:item>
   <:item title="Categories">
-    <span :for={category <- @book.categories}>
-      <%= category.title %>,
-    </span>
+    <%= Enum.map(@book.categories, &(&1.title)) |> Enum.join(", ")%>
   </:item>
 </.list>
 
