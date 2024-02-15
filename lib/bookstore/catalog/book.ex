@@ -40,7 +40,7 @@ defmodule Bookstore.Catalog.Book do
     |> validate_format(:isbn, ~r/^(?:\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d)$/)
     |> validate_length(:isbn, min: 10)
     |> validate_length(:isbn, max: 17)
-    |> validate_isbn()
+#   |> validate_isbn()
     |> validate_pub_date()
     |> validate_number(:quantity, greater_than_or_equal_to: 0)
     |> validate_number(:price, greater_than_or_equal_to: 0)
@@ -48,20 +48,22 @@ defmodule Bookstore.Catalog.Book do
 
   defp validate_isbn(changeset) do
     validate_change(changeset, :isbn, fn :isbn, isbn ->
-      [head | tail] = String.replace(isbn, "-", "")
-      |> String.split("", trim: true)
-      |> Enum.map(&(String.to_integer(&1)))
+      [head | tail] =
+        String.replace(isbn, "-", "")
+        |> String.split("", trim: true)
+        |> Enum.map(&String.to_integer(&1))
 
-      is_valid_isbn = [head | Enum.map_every(tail, 2, &(&1*3))]
-      |> Enum.sum()
-      |> rem(10) == 0
+      is_valid_isbn =
+        [head | Enum.map_every(tail, 2, &(&1 * 3))]
+        |> Enum.sum()
+        |> rem(10) == 0
 
       if is_valid_isbn do
         []
       else
         [isbn: "not a valid isbn number"]
       end
-      end)
+    end)
   end
 
   defp validate_pub_date(changeset) do
