@@ -6,19 +6,23 @@ defmodule BookstoreWeb.BookControllerTest do
   @create_attrs %{
     title: "some title",
     editor: "some editor",
-    isbn: "some isbn",
+    isbn: "978-84-663-0446-5",
     pub_date: ~D[2024-02-07],
     price: 120.5,
     quantity: 42,
+    categories: %{},
+    authors: %{},
     img: "some img"
   }
   @update_attrs %{
     title: "some updated title",
     editor: "some updated editor",
-    isbn: "some updated isbn",
+    isbn: "978-84-663-0446-5",
     pub_date: ~D[2024-02-08],
     price: 456.7,
     quantity: 43,
+    categories: %{},
+    authors: %{},
     img: "some updated img"
   }
   @invalid_attrs %{
@@ -28,6 +32,8 @@ defmodule BookstoreWeb.BookControllerTest do
     pub_date: nil,
     price: nil,
     quantity: nil,
+    categories: nil,
+    authors: nil,
     img: nil
   }
 

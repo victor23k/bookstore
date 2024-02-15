@@ -7,19 +7,23 @@ defmodule BookstoreWeb.BookLiveTest do
   @create_attrs %{
     title: "some title",
     editor: "some editor",
-    isbn: "some isbn",
+    isbn: "978-84-663-0446-5",
     pub_date: "2024-02-11",
     price: 120.5,
     quantity: 42,
+    categories: nil,
+    authors: nil,
     img: "some img"
   }
   @update_attrs %{
     title: "some updated title",
     editor: "some updated editor",
-    isbn: "some updated isbn",
+    isbn: "978-84-663-0446-5",
     pub_date: "2024-02-12",
     price: 456.7,
     quantity: 43,
+    categories: nil,
+    authors: nil,
     img: "some updated img"
   }
   @invalid_attrs %{
@@ -27,8 +31,10 @@ defmodule BookstoreWeb.BookLiveTest do
     editor: nil,
     isbn: nil,
     pub_date: nil,
-    price: nil,
-    quantity: nil,
+    price: 0,
+    quantity: 0,
+    categories: nil,
+    authors: nil,
     img: nil
   }
 

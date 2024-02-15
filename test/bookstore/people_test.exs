@@ -30,18 +30,18 @@ defmodule Bookstore.PeopleTest do
     test "create_author/1 with valid data creates a author" do
       valid_attrs = %{
         name: "some name",
-        dead: ~D[2024-02-12],
+        dead: ~D[2024-02-14],
         surname: "some surname",
-        born: ~D[2024-02-12],
+        born: ~D[2024-02-13],
         birth_place: "some birth_place",
         death_place: "some death_place"
       }
 
       assert {:ok, %Author{} = author} = People.create_author(valid_attrs)
       assert author.name == "some name"
-      assert author.dead == ~D[2024-02-12]
+      assert author.dead == ~D[2024-02-14]
       assert author.surname == "some surname"
-      assert author.born == ~D[2024-02-12]
+      assert author.born == ~D[2024-02-13]
       assert author.birth_place == "some birth_place"
       assert author.death_place == "some death_place"
     end
@@ -55,18 +55,18 @@ defmodule Bookstore.PeopleTest do
 
       update_attrs = %{
         name: "some updated name",
-        dead: ~D[2024-02-13],
+        dead: ~D[2024-02-15],
         surname: "some updated surname",
-        born: ~D[2024-02-13],
+        born: ~D[2024-02-14],
         birth_place: "some updated birth_place",
         death_place: "some updated death_place"
       }
 
       assert {:ok, %Author{} = author} = People.update_author(author, update_attrs)
       assert author.name == "some updated name"
-      assert author.dead == ~D[2024-02-13]
+      assert author.dead == ~D[2024-02-15]
       assert author.surname == "some updated surname"
-      assert author.born == ~D[2024-02-13]
+      assert author.born == ~D[2024-02-14]
       assert author.birth_place == "some updated birth_place"
       assert author.death_place == "some updated death_place"
     end

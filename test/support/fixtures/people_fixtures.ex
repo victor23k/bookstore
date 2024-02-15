@@ -13,7 +13,7 @@ defmodule Bookstore.PeopleFixtures do
       |> Enum.into(%{
         birth_place: "some birth_place",
         born: ~D[2024-02-12],
-        dead: ~D[2024-02-12],
+        dead: ~D[2024-02-13],
         death_place: "some death_place",
         name: "some name",
         surname: "some surname"

@@ -14,10 +14,12 @@ defmodule Bookstore.CatalogFixtures do
         editor: "some editor",
         author: "some author",
         img: "some img",
-        isbn: "some isbn",
+        isbn: "978-84-663-0446-5",
         price: 120.5,
         pub_date: ~D[2024-02-07],
         quantity: 42,
+        authors: %Bookstore.People.Author{},
+        categories: %Bookstore.Catalog.Category{},
         title: "some title"
       })
       |> Bookstore.Catalog.create_book()
