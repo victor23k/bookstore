@@ -38,9 +38,28 @@ defmodule Bookstore.Catalog.Book do
     |> cast(attrs, [:title, :isbn, :pub_date, :price, :quantity, :editor, :img])
     |> validate_required([:title, :isbn, :pub_date, :price, :quantity, :editor])
     |> validate_format(:isbn, ~r/^(?:\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d)$/)
+    |> validate_isbn()
     |> validate_length(:isbn, min: 10)
     |> validate_length(:isbn, max: 17)
     |> validate_pub_date()
+  end
+
+  defp validate_isbn(changeset) do
+    validate_change(changeset, :isbn, fn :isbn, isbn ->
+      [head | tail] = String.replace(isbn, "-", "")
+      |> String.split("", trim: true)
+      |> Enum.map(&(String.to_integer(&1)))
+
+      is_valid_isbn = [head | Enum.map_every(tail, 2, &(&1*3))]
+      |> Enum.sum()
+      |> rem(10) == 0
+
+      if is_valid_isbn do
+        []
+      else
+        [isbn: "not a valid isbn number"]
+      end
+      end)
   end
 
   defp validate_pub_date(changeset) do
