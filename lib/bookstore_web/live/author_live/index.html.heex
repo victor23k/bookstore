@@ -9,10 +9,9 @@
 
 <.table
   id="authors"
-  viewport_bottom={nil}
-  viewport_top={nil}
+  viewport_bottom=""
+  viewport_top=""
   table_body_class={[]}
-  end_of_timeline?={nil}
   rows={@streams.authors}
   row_click={fn {_id, author} -> JS.navigate(~p"/authors/#{author}") end}
 >

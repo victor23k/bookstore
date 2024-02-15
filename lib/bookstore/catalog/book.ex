@@ -14,8 +14,11 @@ defmodule Bookstore.Catalog.Book do
     Cover image
     Categories <-> Category
   """
+  alias Bookstore.Catalog.Book
   alias Bookstore.Catalog.Category
   alias Bookstore.People.Author
+
+  @type t :: %Book{}
 
   schema "books" do
     field :title, :string

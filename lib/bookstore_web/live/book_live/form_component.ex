@@ -28,6 +28,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:title]} type="text" label="Title" />
+        <a href={~p"/authors/new"}><span>Create author</span></a>
         <.input
           field={@form[:authors_ids]}
           type="select"

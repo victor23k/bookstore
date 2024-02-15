@@ -9,6 +9,8 @@ defmodule Bookstore.Catalog.Category do
   alias Bookstore.Catalog.Book
   alias Bookstore.Catalog.Category
 
+  @type t :: %Category{}
+
   schema "categories" do
     field :title, :string
     field :parent_id, :integer

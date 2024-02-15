@@ -65,6 +65,7 @@ defmodule BookstoreWeb.BookLive.Index do
     end
   end
 
+  @impl true
   def handle_event("next-page", _, socket) do
     {:noreply, paginate_books(socket, socket.assigns.page + 1)}
   end
