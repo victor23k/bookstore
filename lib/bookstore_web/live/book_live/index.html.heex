@@ -20,7 +20,7 @@
 >
   <:col :let={{_id, book}} label="Title"><%= book.title %></:col>
   <:col :let={{_id, book}} label="Authors">
-    <%= Enum.map(book.authors, &("#{&1.name} #{&1.surname}")) |> Enum.join(", ")%>
+    <%= Enum.map(book.authors, &"#{&1.name} #{&1.surname}") |> Enum.join(", ") %>
   </:col>
   <:col :let={{_id, book}} label="ISBN"><%= book.isbn %></:col>
   <:col :let={{_id, book}} label="Publication date"><%= book.pub_date %></:col>
@@ -29,7 +29,7 @@
   <:col :let={{_id, book}} label="Editor"><%= book.editor %></:col>
   <:col :let={{_id, book}} label="Cover"><img src={book.img} /></:col>
   <:col :let={{_id, book}} label="Categories">
-    <%= Enum.map(book.categories, &(&1.title)) |> Enum.join(", ")%>
+    <%= Enum.map(book.categories, & &1.title) |> Enum.join(", ") %>
   </:col>
   <:action :let={{_id, book}}>
     <div class="sr-only">

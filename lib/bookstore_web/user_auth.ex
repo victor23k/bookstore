@@ -1,4 +1,7 @@
 defmodule BookstoreWeb.UserAuth do
+  @moduledoc """
+  Pheonix default user authentication
+  """
   use BookstoreWeb, :verified_routes
 
   import Plug.Conn

@@ -4,9 +4,8 @@ defmodule Bookstore.Accounts do
   """
 
   import Ecto.Query, warn: false
+  alias Bookstore.Accounts.{User, UserNotifier, UserToken}
   alias Bookstore.Repo
-
-  alias Bookstore.Accounts.{User, UserToken, UserNotifier}
 
   ## Database getters
 

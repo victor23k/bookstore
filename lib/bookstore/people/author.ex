@@ -1,4 +1,8 @@
 defmodule Bookstore.People.Author do
+  @moduledoc """
+  This module defines the author schema and its validations
+  """
+
   alias Bookstore.Catalog.Book
   use Ecto.Schema
   import Ecto.Changeset
@@ -21,7 +25,10 @@ defmodule Bookstore.People.Author do
     author
     |> cast(attrs, [:name, :surname, :born, :dead, :birth_place, :death_place])
     |> validate_required([:name, :surname, :born, :birth_place])
-    |> check_constraint(:born, name: :born_before_dead, message: "Author can't be born after dead")
+    |> check_constraint(:born,
+      name: :born_before_dead,
+      message: "Author can't be born after dead"
+    )
     |> unique_constraint(:name, name: :full_author_constraint)
   end
 end

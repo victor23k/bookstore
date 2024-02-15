@@ -1,9 +1,9 @@
 defmodule BookstoreWeb.UserAuthTest do
   use BookstoreWeb.ConnCase, async: true
 
-  alias Phoenix.LiveView
   alias Bookstore.Accounts
   alias BookstoreWeb.UserAuth
+  alias Phoenix.LiveView
   import Bookstore.AccountsFixtures
 
   @remember_me_cookie "_bookstore_web_user_remember_me"

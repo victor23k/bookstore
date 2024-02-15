@@ -1,4 +1,7 @@
 defmodule Bookstore.Accounts.UserNotifier do
+  @moduledoc """
+  Phoenix default user notifier module
+  """
   import Swoosh.Email
 
   alias Bookstore.Mailer

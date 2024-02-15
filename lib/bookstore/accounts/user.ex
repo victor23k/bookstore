@@ -1,4 +1,8 @@
 defmodule Bookstore.Accounts.User do
+  @moduledoc """
+  Phoenix default user module
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

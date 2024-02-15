@@ -107,7 +107,10 @@ defmodule BookstoreWeb.BookLive.FormComponent do
     uploaded_files =
       consume_uploaded_entries(socket, :cover, fn %{path: path}, _entry ->
         dest =
-          Path.join(Application.app_dir(:bookstore, "priv/static/uploads"), image_name(book_params))
+          Path.join(
+            Application.app_dir(:bookstore, "priv/static/uploads"),
+            image_name(book_params)
+          )
 
         File.cp!(path, dest)
         {:ok, ~p"/uploads/#{Path.basename(dest)}"}
@@ -139,7 +142,11 @@ defmodule BookstoreWeb.BookLive.FormComponent do
       |> Enum.map(& &1.id)
 
     for author <- People.list_authors(),
-        do: [key: "#{author.name} #{author.surname}", value: author.id, selected: author.id in existing_ids]
+        do: [
+          key: "#{author.name} #{author.surname}",
+          value: author.id,
+          selected: author.id in existing_ids
+        ]
   end
 
   def error_to_string(:too_large), do: "Too large"

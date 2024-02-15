@@ -14,8 +14,8 @@ defmodule Bookstore.Catalog.Book do
     Cover image
     Categories <-> Category
   """
-  alias Bookstore.People.Author
   alias Bookstore.Catalog.Category
+  alias Bookstore.People.Author
 
   schema "books" do
     field :title, :string
@@ -40,7 +40,7 @@ defmodule Bookstore.Catalog.Book do
     |> validate_format(:isbn, ~r/^(?:\d{3}-\d{1,5}-\d{1,7}-\d{1,7}-\d)$/)
     |> validate_length(:isbn, min: 10)
     |> validate_length(:isbn, max: 17)
-#   |> validate_isbn()
+    #   |> validate_isbn()
     |> validate_pub_date()
     |> validate_number(:quantity, greater_than_or_equal_to: 0)
     |> validate_number(:price, greater_than_or_equal_to: 0)

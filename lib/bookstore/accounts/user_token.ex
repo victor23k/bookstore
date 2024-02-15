@@ -1,4 +1,7 @@
 defmodule Bookstore.Accounts.UserToken do
+  @moduledoc """
+  Pheonix default user token
+  """
   use Ecto.Schema
   import Ecto.Query
   alias Bookstore.Accounts.UserToken
