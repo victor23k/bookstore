@@ -40,7 +40,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
         <.input field={@form[:price]} type="number" label="Price" step="any" />
         <.input field={@form[:quantity]} type="number" label="Quantity" />
         <.input field={@form[:editor]} type="text" label="Editor" />
-        <.input field={@form[:img]} type="text" label="Cover" hidden />
+        <.input field={@form[:img]} type="text" label="Cover path" />
 
         <section phx-drop-target={@uploads.cover.ref}>
           <img height="260" width="125" src={@changeset.data.img} />
@@ -107,7 +107,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
     uploaded_files =
       consume_uploaded_entries(socket, :cover, fn %{path: path}, _entry ->
         dest =
-          Path.join(Application.app_dir(:bookstore, "priv/static/uploads"), Path.basename(path))
+          Path.join(Application.app_dir(:bookstore, "priv/static/uploads"), image_name(book_params))
 
         File.cp!(path, dest)
         {:ok, ~p"/uploads/#{Path.basename(dest)}"}
@@ -139,7 +139,7 @@ defmodule BookstoreWeb.BookLive.FormComponent do
       |> Enum.map(& &1.id)
 
     for author <- People.list_authors(),
-        do: [key: author.surname, value: author.id, selected: author.id in existing_ids]
+        do: [key: "#{author.name} #{author.surname}", value: author.id, selected: author.id in existing_ids]
   end
 
   def error_to_string(:too_large), do: "Too large"
@@ -183,4 +183,10 @@ defmodule BookstoreWeb.BookLive.FormComponent do
 
   defp image_to_save(book_params, []), do: Map.get(book_params, "img", "")
   defp image_to_save(_, [uploaded_image]), do: uploaded_image
+
+  defp image_name(book_params) do
+    Map.get(book_params, "title")
+    |> String.replace(" ", "_")
+    |> Kernel.<>("_cover")
+  end
 end
