@@ -21,6 +21,8 @@ defmodule BookstoreWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/datafeed", DataFeed, :index
+    get "/cover/:name", CoverImg, :index
 
     live_session :authenticated, on_mount: [{BookstoreWeb.UserAuth, :ensure_authenticated}] do
       live "/books", BookLive.Index, :index
@@ -40,9 +42,9 @@ defmodule BookstoreWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", BookstoreWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", BookstoreWeb do
+    pipe_through :api
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:bookstore, :dev_routes) do

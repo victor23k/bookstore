@@ -11,6 +11,7 @@ defmodule BookstoreWeb.BookLive.Index do
     {:ok,
      socket
      |> assign(page: 1, per_page: 10)
+     |> assign(search_form: to_form(%{"text" => ""}))
      |> paginate_books(1)}
   end
 
@@ -63,6 +64,10 @@ defmodule BookstoreWeb.BookLive.Index do
         |> assign(:page, new_page)
         |> stream(:books, books, at: at, limit: limit)
     end
+  end
+
+  def handle_event("search", _, socket) do
+    {:noreply, socket}
   end
 
   @impl true

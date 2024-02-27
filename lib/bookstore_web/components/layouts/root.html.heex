@@ -10,6 +10,21 @@
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
+    <script>
+      const dfLayerOptions = {
+        installationId: '50b05145-e3b1-4522-bb97-fdc180118f21',
+        zone: 'eu1'
+      };
+
+      
+
+      (function (l, a, y, e, r, s) {
+        r = l.createElement(a); r.onload = e; r.async = 1; r.src = y;
+        s = l.getElementsByTagName(a)[0]; s.parentNode.insertBefore(r, s);
+      })(document, 'script', 'https://cdn.doofinder.com/livelayer/1/js/loader.min.js', function () {
+        doofinderLoader.load(dfLayerOptions);
+      });
+    </script>
   </head>
   <body class="bg-white antialiased">
     <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
