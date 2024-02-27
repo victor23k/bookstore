@@ -514,7 +514,7 @@ for attrs <- [
       },
       %{
         title: "El amor en los tiempos del cólera",
-        authors_ids: ["27"],
+        authors_ids: ["22"],
         isbn: "978-84-376-0194-6",
         price: 11.99,
         pub_date: "1985-05-15",
@@ -526,7 +526,7 @@ for attrs <- [
       },
       %{
         title: "Como agua para chocolate",
-        authors_ids: ["28"],
+        authors_ids: ["27"],
         isbn: "978-84-8306-030-0",
         price: 10.50,
         pub_date: "1989-01-01",
@@ -550,7 +550,7 @@ for attrs <- [
       },
       %{
         title: "La ciudad y los perros",
-        authors_ids: ["29"],
+        authors_ids: ["28"],
         isbn: "978-84-9759-278-1",
         price: 12.99,
         pub_date: "1963-10-01",
@@ -562,7 +562,7 @@ for attrs <- [
       },
       %{
         title: "Los renglones torcidos de Dios",
-        authors_ids: ["30"],
+        authors_ids: ["29"],
         isbn: "978-84-663-0446-5",
         price: 9.25,
         pub_date: "1979-09-30",
