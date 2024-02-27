@@ -38,7 +38,7 @@ defmodule BookstoreWeb.DataFeed do
         "datafeed.csv"
       )
 
-    csv_content = "id;title;link;image_url;price;category;availability\n" <> get_all_products()
+    csv_content = "id;title;link;image_url;price;category;availability;authors\n" <> get_all_products()
     :ok = File.write(path, csv_content)
 
     conn
@@ -62,10 +62,10 @@ defmodule BookstoreWeb.DataFeed do
   category 	The category or type of the product (e.g., electronics, clothing, home & garden) 	Clothing > Tshirts 	Recommended
   availability 	Indicates if the product is in stock or out of stock. 	In stock 	Optional
 
-  CSV headers: id, title, link, image_url, price, category, availability
+  CSV headers: id, title, link, image_url, price, category, availability, authors
   """
   def transform_book_to_product(%Book{} = book) do
-    "#{book.id};#{book.title};#{book_link(book)};#{get_image_link(book.img)};#{book.price};#{build_categories(book.categories)};#{get_availability(book.quantity)}"
+    "#{book.id};#{book.title};#{book_link(book)};#{get_image_link(book.img)};#{book.price};#{build_categories(book.categories)};#{get_availability(book.quantity)};#{authors(book)}"
   end
 
   @spec book_link(Book.t()) :: String.t()
@@ -90,5 +90,9 @@ defmodule BookstoreWeb.DataFeed do
     else
       link
     end
+  end
+
+  defp authors(%Book{} = book) do
+    Enum.map_join(book.authors, ", ", &("#{&1.name} #{&1.surname}"))
   end
 end

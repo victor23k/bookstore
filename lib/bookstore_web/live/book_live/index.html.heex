@@ -1,13 +1,5 @@
 <.header>
   Listing Books
-  <search>
-    <.simple_form for={@search_form} phx-submit="search">
-      <.input id="search-box" field={@search_form[:text]} type="text" />
-      <:actions>
-        <.button>Search</.button>
-      </:actions>
-    </.simple_form>
-  </search>
   <:actions>
     <.link patch={~p"/books/new"}>
       <.button>New Book</.button>
